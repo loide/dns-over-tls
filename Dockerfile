@@ -11,4 +11,6 @@ COPY src ./
 
 RUN pip install -r requirements.txt
 
+EXPOSE 53/tcp 53/udp
+
 ENTRYPOINT [ "python", "./proxy.py" ]
