@@ -5,12 +5,17 @@ import ssl
 import threading
 import logging
 import click
+import os
 from udp import Udp
 from tcp import Tcp
 
 
 def listen_tcp(address, port, dns, ca):
     """ Listening for DNS TCP requests """
+    logging.info(
+            "LISTENING TCP: %d",
+            os.getpid()
+            )
     try:
         tcp = Tcp()
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -31,6 +36,10 @@ def listen_tcp(address, port, dns, ca):
 
 def listen_udp(address, port, dns, ca):
     """ Listening for DNS UDP requests """
+    logging.info(
+            "LISTENING UDP: %d",
+            os.getpid()
+            )
     try:
         udp = Udp()
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -72,10 +81,17 @@ def main(port, address, dns, ca):
     DNS to DNS-over-TLS simple deamon.
     """
     logging.basicConfig(level=logging.INFO)
-    listen_udp(address, port, dns, ca)
-    #listen_tcp(address, port, dns, ca)
-    # Process(target=listen_tcp(address, port, dns, ca)).start()
-    # Process(target=listen_udp(address, port, dns, ca)).start()
+    threads = []
+    p_udp = threading.Thread(target=listen_udp, args=(address, port, dns, ca))
+    p_udp.start()
+    threads.append(p_udp)
+
+    p_tcp = threading.Thread(target=listen_tcp, args=(address, port, dns, ca))
+    p_tcp.start()
+    threads.append(p_tcp)
+
+    for t in threads:
+        t.join()
 
 
 if __name__ == "__main__":
