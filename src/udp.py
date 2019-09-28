@@ -4,11 +4,12 @@ import logging
 import binascii
 from config import Config
 
+
 class Udp:
     def send_message_tls(self, dns, query, ca_path):
         """ Send request to a secure DNS Server from UDP Socket"""
         try:
-            server = (dns, 853) # default port for cloudflare
+            server = (dns, 853)  # default port for cloudflare
 
             # tcp socket
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,7 +23,10 @@ class Udp:
 
             wrapped_socket = ssl_ctx.wrap_socket(sock, server_hostname=dns)
             wrapped_socket.connect(server)
-            logging.info("SERVER PEER CERTIFICATE: %s", str(wrapped_socket.getpeercert()))
+            logging.info(
+                    "SERVER PEER CERTIFICATE: %s",
+                    str(wrapped_socket.getpeercert())
+            )
 
             tcp_msg = "\x00".encode() + chr(len(query)).encode() + query
             logging.info("CLIENT REQUEST: %s", str(tcp_msg))
@@ -43,7 +47,10 @@ class Udp:
                 rcode = binascii.hexlify(answer[:6]).decode("utf-8")
                 rcode = rcode[11:]
                 if int(rcode, 16) == 1:
-                    logging.error("ERROR PROCESSING THE REQUEST, RCODE = %s", rcode)
+                    logging.error(
+                            "ERROR PROCESSING THE REQUEST, RCODE = %s",
+                            rcode
+                    )
                 else:
                     logging.info("PROXY OK, RCODE = %s", rcode)
                     return_ans = answer[2:]
@@ -53,9 +60,7 @@ class Udp:
         else:
             logging.warn("EMPTY REPLY FROM SERVER.")
 
-
     def handler(self, data, address, socket, dns_addr, ca_path):
         answer = self.send_message_tls(dns_addr, data, ca_path)
 
         self.response(answer, address, socket)
-

@@ -3,11 +3,12 @@ import ssl
 import logging
 import binascii
 
+
 class Tcp:
     def send_request_tls(self, dns, query, ca_path):
         """ Send request to a secure DNS Server from TCP Socket"""
         try:
-            server = (dns, 853) # default port for cloudflare
+            server = (dns, 853)  # default port for cloudflare
 
             # tcp socket
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,7 +23,10 @@ class Tcp:
             wrapped_socket = ssl_ctx.wrap_socket(sock, server_hostname=dns)
             wrapped_socket.connect(server)
 
-            logging.info("SERVER PEER CERTIFICATE: %s", str(wrapped_socket.getpeercert()))
+            logging.info(
+                    "SERVER PEER CERTIFICATE: %s",
+                    str(wrapped_socket.getpeercert())
+            )
 
             logging.info("CLIENT REQUEST: %s", str(query))
             wrapped_socket.sendall(query)
@@ -41,7 +45,10 @@ class Tcp:
                 rcode = binascii.hexlify(answer[:6]).decode("utf-8")
                 rcode = rcode[11:]
                 if int(rcode, 16) == 1:
-                    logging.error("ERROR PROCESSING THE REQUEST, RCODE = %s", rcode)
+                    logging.error(
+                            "ERROR PROCESSING THE REQUEST, RCODE = %s",
+                            rcode
+                    )
                 else:
                     logging.info("PROXY OK, RCODE = %s", rcode)
                     conn.send(answer)
