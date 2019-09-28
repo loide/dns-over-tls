@@ -2,7 +2,6 @@ import socket
 import ssl
 import logging
 import binascii
-from config import Config
 
 
 class Udp:
