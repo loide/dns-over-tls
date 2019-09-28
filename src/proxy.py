@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 def send_message(dns, query, ca_path):
 
     server = (dns, 853)
+    # tcp socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock.settimeout(80)
 
@@ -62,10 +63,11 @@ def thread(data, address, socket, dns, ca_path):
                 [default: /etc/ssl/cert.pem]")
 def main(port, address, dns, ca):
     """
-    DNS to DNS-over-TLS proxy
+    DNS to DNS-over-TLS simple deamon.
     """
 
     try:
+        # udp socket
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         sock.bind((address, port))
         while True:
