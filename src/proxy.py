@@ -5,9 +5,26 @@ import ssl
 import threading
 import logging
 import click
-from multiprocessing import Process
 from udp import Udp
-from config import Config
+from tcp import Tcp
+
+def listen_tcp(address, port, dns, ca):
+    try:
+        tcp = Tcp()
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.bind((address, port))
+        sock.listen(2)
+        while True:
+            conn, addr = sock.accept()
+            data = conn.recv(1024)
+            threading.Thread(
+                    target=tcp.handler,
+                    args=(data, addr, conn, dns, ca)
+                    ).start()
+    except Exception as e:
+        logging.error(e)
+    finally:
+        sock.close()
 
 def listen_udp(address, port, dns, ca):
     """ Listening for DNS UDP requests """
@@ -44,7 +61,10 @@ def main(port, address, dns, ca):
     DNS to DNS-over-TLS simple deamon.
     """
     logging.basicConfig(level=logging.INFO)
-    Process(target=listen_udp(address, port, dns, ca)).start()
+    listen_udp(address, port, dns, ca)
+    #Process(target=listen_tcp(address, port, dns, ca)).start()
+    #Process(target=listen_udp(address, port, dns, ca)).start()
+
 
 if __name__ == "__main__":
     main()
