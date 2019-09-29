@@ -88,11 +88,18 @@ Runs using multithreading and accept multiples requests.
   $ dig @127.0.0.1 google.com +tcp
   ```
 
-## Known issues
-- Only deployed in Mac OS Mojave.
+## Concerns & Known issues
+* Only tested in Mac OS Mojave.
+* Security concerns: this approach gives an additional layer of security, by
+sending queries on an encrypted connection. But it is not protected from the
+incoming requests which could attacked and DNS requests and responses readed
+or altered.
+* Vunerable to DNS flood attack
+* This proxy could be deployed in a kubernetes cluster to add high
+availability and automatic deployment, scaling and load balancing.
 
-## ToDo
-* Write and execute more tests.
+## Improvements
+* Write and execute more tests (unit and integration).
 * Implement support to IPv6
 * Check if the input actually is a DNS query and reject if it isn't.
 * Support multiples backends and provide some fault tolerance by using the next
