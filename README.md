@@ -1,9 +1,10 @@
 # DNS to DNS over TLS proxy
 
 Simple proxy that captures DNS requests from the host, redirects the query over
-an encrypted channel to a DNS server that supports TLS (Cloudflare). It is a
-deamon that listen on port 53 to capture DNS UDP and TCP requests.
-Run using multithreading and accept multiples requests.
+an encrypted channel to a DNS server that supports TLS (Cloudflare). 
+It is a deamon that listen to conventional DNS requests on port 53 to capture
+DNS UDP and DNS TCP requests.
+Runs using multithreading and accept multiples requests.
 
 ## Requirements
 * Python3
@@ -90,11 +91,12 @@ Run using multithreading and accept multiples requests.
 ## Known issues
 - Only deployed in Mac OS Mojave.
 
-## TODO
+## ToDo
 * Write and execute more tests.
 * Implement support to IPv6
 * Check if the input actually is a DNS query and reject if it isn't.
 * Suppor multiples backends and provide some fault tolerance by using the next
 if one doesn't answer or fail.
 * Implement caching
-* generate and use a proper TLS cert for the handshake
+* Generate and use a proper TLS cert for the handshake
+* Save logs to capture the performance
