@@ -91,9 +91,11 @@ Runs using multithreading and accept multiples requests.
 ## Concerns & Known issues
 * Only tested in Mac OS Mojave.
 * Security concerns: this approach gives an additional layer of security, by
-sending queries on an encrypted connection. But it is not protected from the
-incoming requests which could attacked and DNS requests and responses readed
-or altered.
+sending queries to the DNS server on an encrypted connection. But it is not
+protected from the incoming requests from the client which could be attacked
+and DNS requests and responses readed or manipulated.
+* Should enable Docker Content Trust to verify integrity authenticity of the
+Docker images.
 * Vunerable to DNS flood attack
 * This proxy could be deployed in a kubernetes cluster to add high
 availability and automatic deployment, scaling and load balancing.
