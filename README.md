@@ -13,6 +13,7 @@ Runs using multithreading and accept multiples requests.
 
 ## Usage
 * Running the python script locally:
+
   After download this repository, install dependencies:
 
   ```
@@ -37,6 +38,7 @@ Runs using multithreading and accept multiples requests.
     --help              Show this message and exit.
   ```
 * Running in a Docker container:
+
   On this step, you may build the image using the Dockerfile or just download
   and run the docker image from my Docker Hub account.
   To build and run the docker the docker image:
