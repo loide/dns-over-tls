@@ -1,7 +1,9 @@
 # DNS to DNS over TLS proxy
 
 Simple proxy that captures DNS requests from the host, redirects the query over
-an encrypted channel to a DNS server that supports TLS (Cloudflare).
+an encrypted channel to a DNS server that supports TLS (Cloudflare). It is a
+deamon that listen on port 53 to capture DNS UDP and TCP requests.
+Run using multithreading and accept multiples requests.
 
 ## Requirements
 * Python3
