@@ -90,6 +90,12 @@ Runs using multithreading and accept multiples requests.
   ```
   $ dig @127.0.0.1 google.com +tcp
   ```
+  Also, there is a bash script to make multiples DNS requests. The request is
+  50% tcp and 50% udp. Just run:
+  ```
+  $ cd tests
+  $ ./queryflood.sh
+  ```
 
 ## Concerns & Known issues
 * Only tested in Mac OS Mojave.
