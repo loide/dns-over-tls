@@ -94,13 +94,13 @@ Runs using multithreading and accept multiples requests.
 sending queries to the DNS server on an encrypted connection. But it is not
 protected from the incoming requests from the client which could be attacked
 and DNS requests and responses readed or manipulated.
-* Should enable Docker Content Trust to verify integrity authenticity of the
-Docker images.
+* Should enable Docker Content Trust to verify integrity and authenticity of
+the Docker images.
 * Vunerable to DNS flood attack
-* This proxy could be deployed in a kubernetes cluster to add high
-availability and automatic deployment, scaling and load balancing.
 
 ## Improvements
+* This proxy could be deployed in a kubernetes cluster to add high availability
+and automatic deployment, scaling and load balancing.
 * Write and execute more tests (unit and integration).
 * Implement support to IPv6
 * Check if the input actually is a DNS query and reject if it isn't.
