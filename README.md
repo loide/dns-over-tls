@@ -36,6 +36,12 @@ an encrypted channel to a DNS server that supports TLS (Cloudflare).
 * Running in a Docker container:
   On this step, you may build the image using the Dockerfile or just download
   and run the docker image from my Docker Hub account.
+  To build and run the docker the docker image:
+  ```
+  $ docker build -t="dnstls" .
+  $ docker run --rm -p 53:53/tcp -p 53:53/udp dnstls
+  ```
+  To run the image from Docker hub:
   ```
   $ docker run --rm -p 53:53/tcp -p 53:53/udp maraloide/dnstls
   ```
@@ -80,3 +86,13 @@ an encrypted channel to a DNS server that supports TLS (Cloudflare).
   ```
 
 ## Known issues
+- Only deployed in Mac OS Mojave.
+
+## TODO
+* Write and execute more tests.
+* Implement support to IPv6
+* Check if the input actually is a DNS query and reject if it isn't.
+* Suppor multiples backends and provide some fault tolerance by using the next
+if one doesn't answer or fail.
+* Implement caching
+* generate and use a proper TLS cert for the handshake
