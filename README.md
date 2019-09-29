@@ -95,7 +95,7 @@ Runs using multithreading and accept multiples requests.
 * Write and execute more tests.
 * Implement support to IPv6
 * Check if the input actually is a DNS query and reject if it isn't.
-* Suppor multiples backends and provide some fault tolerance by using the next
+* Support multiples backends and provide some fault tolerance by using the next
 if one doesn't answer or fail.
 * Implement caching
 * Generate and use a proper TLS cert for the handshake
