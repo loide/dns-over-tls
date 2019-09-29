@@ -51,8 +51,9 @@ Runs using multithreading and accept multiples requests.
   $ docker run --rm -p 53:53/tcp -p 53:53/udp maraloide/dnstls
   ```
 
-  If instead of using the default dns server or port, you may send a new value
-  using the options for proxy.py.
+  You may set new values for configuration (dns server, port, etc) using the
+  flags options when executing proxy.py. The docker container execute with the
+  default configuration.
 
 ## Testing
   After start the proxy, you can test a DNS request using Dig.
