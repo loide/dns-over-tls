@@ -41,7 +41,7 @@ Runs using multithreading and accept multiples requests.
 
   On this step, you may build the image using the Dockerfile or just download
   and run the docker image from my Docker Hub account.
-  To build and run the docker the docker image:
+  To build and run the docker image:
   ```
   $ docker build -t="dnstls" .
   $ docker run --rm -p 53:53/tcp -p 53:53/udp dnstls
