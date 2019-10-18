@@ -96,25 +96,3 @@ Runs using multithreading and accept multiples requests.
   $ cd tests
   $ ./queryflood.sh
   ```
-
-## Concerns & Known issues
-* Only tested in Mac OS Mojave.
-* Security concerns: this approach gives an additional layer of security, by
-sending queries to the DNS server on an encrypted connection. But it is not
-protected from the incoming requests from the client which could be attacked
-and DNS requests and responses readed or manipulated.
-* Should enable Docker Content Trust to verify integrity and authenticity of
-the Docker images.
-* Vunerable to DNS flood attack
-
-## Improvements
-* This proxy could be deployed in a kubernetes cluster to add high availability
-and automatic deployment, scaling and load balancing.
-* Write and execute more tests (unit and integration).
-* Implement support to IPv6
-* Check if the input actually is a DNS query and reject if it isn't.
-* Support multiples backends and provide some fault tolerance by using the next
-if one doesn't answer or fail.
-* Implement caching
-* Generate and use a proper TLS cert for the handshake
-* Save logs to capture the performance
